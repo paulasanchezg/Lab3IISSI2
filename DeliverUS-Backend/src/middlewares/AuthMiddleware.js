@@ -1,5 +1,6 @@
 import passport from 'passport'
 
+
 const hasRole = (...roles) => (req, res, next) => {
   if (!req.user) {
     return res.status(403).send({ error: 'Not logged in' })
@@ -9,6 +10,8 @@ const hasRole = (...roles) => (req, res, next) => {
   }
   return next()
 }
+
+// Esta logueado
 const isLoggedIn = (req, res, next) => {
   passport.authenticate('bearer', { session: false })(req, res, next)
 }

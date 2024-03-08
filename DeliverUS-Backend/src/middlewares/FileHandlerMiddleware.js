@@ -1,6 +1,8 @@
 import fs from 'fs'
 import multer from 'multer'
 
+// administracion de los ficheros
+
 const addFilenameToBody = (req, fieldNames) => {
   fieldNames.forEach(fieldName => {
     if (req.files?.[fieldName]) {
@@ -30,6 +32,7 @@ const createMulter = (fieldNames, folder) => {
   }
 }
 
+// recibe archivos y la carpeta donde guarda las imagenes
 const handleFilesUpload = (fieldNames, folder) => (req, res, next) => {
   const multerInstance = createMulter(fieldNames, folder)
   multerInstance(req, res, (err) => {

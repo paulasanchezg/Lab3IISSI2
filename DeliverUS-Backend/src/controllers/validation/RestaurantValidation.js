@@ -17,8 +17,15 @@ const create = [
   }).withMessage('Please upload an image with format (jpeg, png).'),
   check('logo').custom((value, { req }) => {
     return checkFileMaxSize(req, 'logo', maxFileSize)
-  }).withMessage('Maximum file size of ' + maxFileSize / 1000000 + 'MB')
+  }).withMessage('Maximum file size of ' + maxFileSize / 1000000 + 'MB'),
   // TODO: Complete validations
+  check('address').exists().isString().isLength({ min: 1, max: 255 }).trim(),
+  check('postalCode').exists().isString().isLength({ min: 1, max: 255 }).trim(),
+  check('url').optional({ nullable: true, checkFalsy: true }).isString().isURL().trim(),
+  check('email').optional({ nullable: true, checkFalsy: true }).isString().isEmail().trim(),
+  check('phone').optional({ nullable: true, checkFalsy: true }).isString().isLength({ min: 1, max: 255 }).trim(),
+  check('restaurantCategoryId').exists({ checkNull: true }).isInt({ min: 1 }).toInt(),
+  check('userId').not().exists()
 ]
 const update = [
   check('name').exists().isString().isLength({ min: 1, max: 255 }).trim(),
@@ -35,8 +42,15 @@ const update = [
   }).withMessage('Please upload an image with format (jpeg, png).'),
   check('logo').custom((value, { req }) => {
     return checkFileMaxSize(req, 'logo', maxFileSize)
-  }).withMessage('Maximum file size of ' + maxFileSize / 1000000 + 'MB')
+  }).withMessage('Maximum file size of ' + maxFileSize / 1000000 + 'MB'),
   // TODO: Complete validations
+  check('address').exists().isString().isLength({ min: 1, max: 255 }).trim(),
+  check('postalCode').exists().isString().isLength({ min: 1, max: 255 }).trim(),
+  check('url').optional({ nullable: true, checkFalsy: true }).isString().isURL().trim(),
+  check('email').optional({ nullable: true, checkFalsy: true }).isString().isEmail().trim(),
+  check('phone').optional({ nullable: true, checkFalsy: true }).isString().isLength({ min: 1, max: 255 }).trim(),
+  check('restaurantCategoryId').exists({ checkNull: true }).isInt({ min: 1 }).toInt(),
+  check('userId').not().exists()
 ]
 
 export { create, update }
